@@ -37,8 +37,41 @@ function annotateLogs(filePath: string) {
   const lines = fileContent.split("\n");
 
   const annotatedLines = lines.map((line, index) => {
-    // Replace placeholder with actual line number
-    return line.replace("@location", `${fileName}:${index + 1}`);
+    // find out if the line contains a log method
+    if (
+      line.includes(".log(") ||
+      line.includes(".error(") ||
+      line.includes(".warn(") ||
+      line.includes(".info(")
+    ) {
+      const logContentInsideRoundBrackets = line.match(/\(([^)]+)\)/);
+      if (logContentInsideRoundBrackets) {
+        const logContent = logContentInsideRoundBrackets[1];
+
+        // avoid duplication
+        if (logContent.includes("@Location:")) {
+          // if the line already contains the location, remove the complete [] block
+          const logContentWithoutLocation = logContent.replace(
+            /"\[ @Location:.* \]", /,
+            ""
+          );
+          // and add the new location
+          return line.replace(
+            logContent,
+            `"[ @Location: ${fileName}:${
+              index + 1
+            } ]", ${logContentWithoutLocation}`
+          );
+        }
+        return line.replace(
+          logContent,
+          `"[ @Location: ${fileName}:${index + 1} ]", ${logContent}`
+        );
+      }
+    }
+
+    // if the line does not contain a log method, return the line as is
+    return line;
   });
 
   const annotatedContent = annotatedLines.join("\n");
