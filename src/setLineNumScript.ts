@@ -1,3 +1,8 @@
+// Separate script to add the location of the log statement in the log message
+// to run this script, run the following command in the terminal:
+// node ./node_modules/@prakhartandon_org/logm/lib/setLineNumScript.js <paths-to-directory>
+// no direct path has been set yet, so you'll need to run by manually targeting as above.
+
 import fs from "fs";
 import path from "path";
 
@@ -78,11 +83,22 @@ function annotateLogs(filePath: string) {
   fs.writeFileSync(filePath, annotatedContent, "utf8");
 }
 
-// const pathsProvided = process.argv.slice(2);
+// check if operated from command line
+if (process) {
+  const pathsProvided = process.argv?.slice(2);
 
-// export const runLineNumScript = () => {
-//   pathsProvided.forEach(function (val, index, array) {
-//     console.log(index + ": " + val);
-//     processDirectory(val);
-//   });
-// };
+  const runLineNumScript = () => {
+    pathsProvided.forEach(function (val, index, array) {
+      console.log(index + ": " + val);
+      processDirectory(val);
+    });
+  };
+
+  if (!pathsProvided) {
+    throw new Error("No paths provided");
+  } else {
+    runLineNumScript();
+  }
+} else {
+  console.log("not running from command line");
+}
