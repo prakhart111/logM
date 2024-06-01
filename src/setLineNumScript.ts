@@ -82,9 +82,7 @@ function annotateLogs(filePath: string) {
   const annotatedContent = annotatedLines.join("\n");
   fs.writeFileSync(filePath, annotatedContent, "utf8");
 }
-
-// check if operated from command line
-if (process) {
+try {
   const pathsProvided = process.argv?.slice(2);
 
   const runLineNumScript = () => {
@@ -93,12 +91,11 @@ if (process) {
       processDirectory(val);
     });
   };
-
   if (!pathsProvided) {
     throw new Error("No paths provided");
   } else {
     runLineNumScript();
   }
-} else {
-  console.log("not running from command line");
+} catch (e: any) {
+  console.error(e.message);
 }

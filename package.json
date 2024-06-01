@@ -1,6 +1,6 @@
 {
   "name": "@prakhartandon_org/logm",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Logging & Monitoring for Plugin Environments",
   "main": "./lib/index.js",
   "types": "dist/index.d.ts",
