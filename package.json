@@ -1,5 +1,5 @@
 {
-  "name": "logm",
+  "name": "@prakhartandon_org/logm",
   "version": "0.0.0-development",
   "description": "Logging & Monitoring for Plugin Environments",
   "main": "./lib/index.js",
