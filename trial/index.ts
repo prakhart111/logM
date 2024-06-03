@@ -1,10 +1,14 @@
-console.log("[ @Location: index.ts:1 ]", "rehersh");
-const wfo = {
-  name: "wfo",
-  age: 23,
+import LogMonitor from "../lib/index";
+
+const test = () => {
+  const t = {
+    name: "test",
+    age: 20,
+  };
+  const Logger = new LogMonitor("dev");
+  Logger.log("[ @Location: index.ts:9 ]", "testing", "abc");
+  Logger.log("[ @Location: index.ts:10 ]", "testing", "abc", t);
+  Logger.error("[ @Location: index.ts:11 ]", "testing", "abc");
 };
-console.log("[ @Location: index.ts:6 ]", wfo);
 
-console.log("[ @Location: index.ts:8 ]", "ershseh");
-
-console.log("[ @Location: index.ts:10 ]", "regesrh");
+test();
