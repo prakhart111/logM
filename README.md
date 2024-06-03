@@ -1,6 +1,7 @@
 # logM
 
 [![npm package][npm-img]][npm-url]
+![Visitors](https://visitor-badge.laobi.icu/badge?page_id=prakhart111.logM)
 
 > Logging & Monitoring Package that comes with a log-location script, useful for plugin/extensions environments where actual line numbers aren't accesible.
 > Sample Usecase: Logging & Monitoring in Figma Plugins.
