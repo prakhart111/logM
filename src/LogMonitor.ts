@@ -8,48 +8,47 @@ class LogMonitor {
     this.mode = mode;
   }
 
-  log(location: string, content?: any) {
+  log(location: string, ...contents: any[]) {
     // style and construct the log message
     const logMessage = `${location} \n`;
-    const style = "text-decoration: underline; font-weight: bold;";
+    const style = "font-weight: bold;";
     if (this.mode === "dev") {
-      DevLogger.log(logMessage, style, content);
+      DevLogger.log(logMessage, style, ...contents);
     } else {
-      ProdLogger.log(logMessage, style, content);
+      ProdLogger.log(logMessage, style, ...contents);
     }
   }
 
-  error(location: string, content?: any) {
+  error(location: string, ...contents: any[]) {
     // style and construct the log message
     const logMessage = `${location} \n`;
     const style = "color: red; font-weight: bold;";
     if (this.mode === "dev") {
-      DevLogger.error(logMessage, style, content);
+      DevLogger.error(logMessage, style, ...contents);
     } else {
-      ProdLogger.error(logMessage, style, content);
+      ProdLogger.error(logMessage, style, ...contents);
     }
   }
 
-  warn(location: string, content?: any) {
+  warn(location: string, ...contents: any[]) {
     // style and construct the log message
     const logMessage = `${location} \n`;
-    const style =
-      "text-decoration: underline; font-weight: bold; color: orange;";
+    const style = "font-weight: bold; color: orange;";
     if (this.mode === "dev") {
-      DevLogger.warn(logMessage, style, content);
+      DevLogger.warn(logMessage, style, ...contents);
     } else {
-      ProdLogger.warn(logMessage, style, content);
+      ProdLogger.warn(logMessage, style, ...contents);
     }
   }
 
-  info(location: string, content?: any) {
+  info(location: string, ...contents: any[]) {
     // style and construct the log message
     const logMessage = `${location} \n`;
-    const style = "text-decoration: underline; font-weight: bold; color: blue;";
+    const style = "font-weight: bold; color: blue;";
     if (this.mode === "dev") {
-      DevLogger.info(logMessage, style, content);
+      DevLogger.info(logMessage, style, ...contents);
     } else {
-      ProdLogger.info(logMessage, style, content);
+      ProdLogger.info(logMessage, style, ...contents);
     }
   }
 }
