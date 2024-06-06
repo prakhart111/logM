@@ -2,16 +2,16 @@ import { DevLogger } from "./DevLogger";
 import { ProdLogger } from "./ProdLogger";
 
 class LogMonitor {
-  mode = "dev"; // dev, prod
+  mode: "dev" | "prod";
 
-  constructor(mode: string) {
+  constructor(mode: "dev" | "prod") {
     this.mode = mode;
   }
 
-  log(location: string, ...contents: any[]) {
+  log(location: string, ...contents: any[]): void {
     // style and construct the log message
-    const logMessage = `${location} \n`;
-    const style = "font-weight: bold;";
+    const logMessage: string = `${location} \n`;
+    const style: string = "font-weight: bold;";
     if (this.mode === "dev") {
       DevLogger.log(logMessage, style, ...contents);
     } else {
@@ -19,10 +19,10 @@ class LogMonitor {
     }
   }
 
-  error(location: string, ...contents: any[]) {
+  error(location: string, ...contents: any[]): void {
     // style and construct the log message
-    const logMessage = `${location} \n`;
-    const style = "color: red; font-weight: bold;";
+    const logMessage: string = `${location} \n`;
+    const style: string = "color: red; font-weight: bold;";
     if (this.mode === "dev") {
       DevLogger.error(logMessage, style, ...contents);
     } else {
@@ -30,10 +30,10 @@ class LogMonitor {
     }
   }
 
-  warn(location: string, ...contents: any[]) {
+  warn(location: string, ...contents: any[]): void {
     // style and construct the log message
-    const logMessage = `${location} \n`;
-    const style = "font-weight: bold; color: orange;";
+    const logMessage: string = `${location} \n`;
+    const style: string = "font-weight: bold; color: orange;";
     if (this.mode === "dev") {
       DevLogger.warn(logMessage, style, ...contents);
     } else {
@@ -41,10 +41,10 @@ class LogMonitor {
     }
   }
 
-  info(location: string, ...contents: any[]) {
+  info(location: string, ...contents: any[]): void {
     // style and construct the log message
-    const logMessage = `${location} \n`;
-    const style = "font-weight: bold; color: blue;";
+    const logMessage: string = `${location} \n`;
+    const style: string = "font-weight: bold; color: blue;";
     if (this.mode === "dev") {
       DevLogger.info(logMessage, style, ...contents);
     } else {
