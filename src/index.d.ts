@@ -1,10 +1,12 @@
 declare class LogMonitor {
   mode: "dev" | "prod";
   constructor(mode: "dev" | "prod");
-  log(location: string, ...contents: any[]): void;
-  error(location: string, ...contents: any[]): void;
-  warn(location: string, ...contents: any[]): void;
-  info(location: string, ...contents: any[]): void;
+  log(location: string, ...contents: unknown[]): void;
+  error(location: string, ...contents: unknown[]): void;
+  warn(location: string, ...contents: unknown[]): void;
+  info(location: string, ...contents: unknown[]): void;
 }
 
-export default LogMonitor;
+declare module "@prakhartandon_org/logm" {
+  export default LogMonitor;
+}

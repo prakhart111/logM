@@ -8,7 +8,7 @@ class LogMonitor {
     this.mode = mode;
   }
 
-  log(location: string, ...contents: any[]): void {
+  log(location: string, ...contents: unknown[]): void {
     // style and construct the log message
     const logMessage: string = `${location} \n`;
     const style: string = "font-weight: bold;";
@@ -19,7 +19,7 @@ class LogMonitor {
     }
   }
 
-  error(location: string, ...contents: any[]): void {
+  error(location: string, ...contents: unknown[]): void {
     // style and construct the log message
     const logMessage: string = `${location} \n`;
     const style: string = "color: red; font-weight: bold;";
@@ -30,7 +30,7 @@ class LogMonitor {
     }
   }
 
-  warn(location: string, ...contents: any[]): void {
+  warn(location: string, ...contents: unknown[]): void {
     // style and construct the log message
     const logMessage: string = `${location} \n`;
     const style: string = "font-weight: bold; color: orange;";
