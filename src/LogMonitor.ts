@@ -1,56 +1,68 @@
-import { DevLogger } from "./DevLogger";
-import { ProdLogger } from "./ProdLogger";
+import { DevLogger } from './DevLogger'
+import { ProdLogger } from './ProdLogger'
 
 class LogMonitor {
-  mode: "dev" | "prod";
+  mode: 'dev' | 'prod'
+  prodPOSTEndpoint: string
+  prodPOSTAuthToken: string
 
-  constructor(mode: "dev" | "prod") {
-    this.mode = mode;
+  constructor(mode: 'dev' | 'prod', prodPOSTEndpoint?: string, prodPOSTAuthToken?: string) {
+    this.mode = mode
+    if (mode === 'prod' && (!prodPOSTEndpoint || !prodPOSTAuthToken)) {
+      throw new Error("prodPOSTEndpoint and prodPOSTAuthToken are required when mode is 'prod'")
+    }
+    if (mode === 'prod' && typeof prodPOSTEndpoint === 'string' && typeof prodPOSTAuthToken === 'string') {
+      this.prodPOSTEndpoint = prodPOSTEndpoint
+      this.prodPOSTAuthToken = prodPOSTAuthToken
+    } else {
+      this.prodPOSTEndpoint = 'NA'
+      this.prodPOSTAuthToken = 'NA'
+    }
   }
 
   log(location: string, ...contents: unknown[]): void {
     // style and construct the log message
-    const logMessage: string = `${location} \n`;
-    const style: string = "font-weight: bold;";
-    if (this.mode === "dev") {
-      DevLogger.log(logMessage, style, ...contents);
+    const logLocation: string = `${location} \n`
+    const style: string = 'font-weight: bold;'
+    if (this.mode === 'dev') {
+      DevLogger.log(logLocation, style, ...contents)
     } else {
-      ProdLogger.log(logMessage, style, ...contents);
+      ProdLogger.log(this.prodPOSTEndpoint, this.prodPOSTAuthToken, logLocation, style, ...contents)
     }
   }
 
   error(location: string, ...contents: unknown[]): void {
     // style and construct the log message
-    const logMessage: string = `${location} \n`;
-    const style: string = "color: red; font-weight: bold;";
-    if (this.mode === "dev") {
-      DevLogger.error(logMessage, style, ...contents);
+    const logLocation: string = `${location} \n`
+    const style: string = 'color: red; font-weight: bold;'
+    if (this.mode === 'dev') {
+      DevLogger.error(logLocation, style, ...contents)
     } else {
-      ProdLogger.error(logMessage, style, ...contents);
+      ProdLogger.error(this.prodPOSTEndpoint, this.prodPOSTAuthToken, logLocation, style, ...contents)
     }
   }
 
   warn(location: string, ...contents: unknown[]): void {
     // style and construct the log message
-    const logMessage: string = `${location} \n`;
-    const style: string = "font-weight: bold; color: orange;";
-    if (this.mode === "dev") {
-      DevLogger.warn(logMessage, style, ...contents);
+    const logLocation: string = `${location} \n`
+    const style: string = 'font-weight: bold; color: orange;'
+    if (this.mode === 'dev') {
+      DevLogger.warn(logLocation, style, ...contents)
     } else {
-      ProdLogger.warn(logMessage, style, ...contents);
+      ProdLogger.warn(this.prodPOSTEndpoint, this.prodPOSTAuthToken, logLocation, style, ...contents)
     }
   }
 
-  info(location: string, ...contents: any[]): void {
+  info(location: string, ...contents: unknown[]): void {
     // style and construct the log message
-    const logMessage: string = `${location} \n`;
-    const style: string = "font-weight: bold; color: blue;";
-    if (this.mode === "dev") {
-      DevLogger.info(logMessage, style, ...contents);
+    const logLocation: string = `${location} \n`
+    const style: string = 'font-weight: bold; color: blue;'
+    if (this.mode === 'dev') {
+      DevLogger.info(logLocation, style, ...contents)
     } else {
-      ProdLogger.info(logMessage, style, ...contents);
+      ProdLogger.info(this.prodPOSTEndpoint, this.prodPOSTAuthToken, logLocation, style, ...contents)
     }
   }
 }
 
-export { LogMonitor };
+export { LogMonitor }

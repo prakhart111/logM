@@ -1,21 +1,51 @@
-// saving to server functionality to be done.
-
 const ProdLogger = {
-  log(logMessage: string, style: string, ...content: any[]) {
-    console.log(`%c${logMessage}`, style, ...content);
+  log(prodPOSTEndpoint: string, prodPOSTAuthToken: string, logLocation: string, style: string, ...content: unknown[]) {
+    postToServer('LOG', prodPOSTEndpoint, prodPOSTAuthToken, logLocation, ...content)
   },
 
-  error(logMessage: string, style: string, ...content: any[]) {
-    console.error(`%c${logMessage}`, style, ...content);
+  error(prodPOSTEndpoint: string, prodPOSTAuthToken: string, logLocation: string, style: string, ...content: unknown[]) {
+    postToServer('ERROR', prodPOSTEndpoint, prodPOSTAuthToken, logLocation, ...content)
   },
 
-  warn(logMessage: string, style: string, ...content: any[]) {
-    console.warn(`%c${logMessage}`, style, ...content);
+  warn(prodPOSTEndpoint: string, prodPOSTAuthToken: string, logLocation: string, style: string, ...content: unknown[]) {
+    postToServer('WARN', prodPOSTEndpoint, prodPOSTAuthToken, logLocation, ...content)
   },
 
-  info(logMessage: string, style: string, ...content: any[]) {
-    console.info(`%c${logMessage}`, style, ...content);
+  info(prodPOSTEndpoint: string, prodPOSTAuthToken: string, logLocation: string, style: string, ...content: unknown[]) {
+    postToServer('INFO', prodPOSTEndpoint, prodPOSTAuthToken, logLocation, ...content)
   },
-};
+}
 
-export { ProdLogger };
+// api call
+const postToServer = async (type: string, prodPOSTEndpoint: string, prodPOSTAuthToken: string, logLocation: string, ...content: unknown[]) => {
+  const data = {
+    type,
+    logLocation,
+    ...content,
+  }
+
+  if (!isValidEndpoint(prodPOSTEndpoint)) {
+    throw new Error('Invalid endpoint')
+  }
+
+  const response = await fetch(prodPOSTEndpoint, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: prodPOSTAuthToken,
+    },
+    body: JSON.stringify(data),
+  })
+
+  if (response.ok) {
+    console.log('Log sent to server')
+  } else {
+    console.error('Error sending log to server')
+  }
+}
+
+const isValidEndpoint = (endpoint: string) => {
+  return endpoint.startsWith('http://') || endpoint.startsWith('https://')
+}
+
+export { ProdLogger }

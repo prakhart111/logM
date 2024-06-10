@@ -1,18 +1,18 @@
 const DevLogger = {
-  log(logMessage: string, style: string, ...content: any[]) {
-    console.log(`%c${logMessage}`, style, ...content);
+  log(logLocation: string, style: string, ...content: any[]) {
+    console.log(`%c${logLocation}`, style, ...content);
   },
 
-  error(logMessage: string, style: string, ...content: any[]) {
-    console.error(`%c${logMessage}`, style, ...content);
+  error(logLocation: string, style: string, ...content: any[]) {
+    console.error(`%c${logLocation}`, style, ...content);
   },
 
-  warn(logMessage: string, style: string, ...content: any[]) {
-    console.warn(`%c${logMessage}`, style, ...content);
+  warn(logLocation: string, style: string, ...content: any[]) {
+    console.warn(`%c${logLocation}`, style, ...content);
   },
 
-  info(logMessage: string, style: string, ...content: any[]) {
-    console.info(`%c${logMessage}`, style, ...content);
+  info(logLocation: string, style: string, ...content: any[]) {
+    console.info(`%c${logLocation}`, style, ...content);
   },
 };
 

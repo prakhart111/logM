@@ -1,4 +1,4 @@
-# logM
+# logM v0.0.8 (beta)
 
 [![npm package][npm-img]][npm-url]
 ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=prakhart111.logM)
@@ -15,14 +15,14 @@ npm install @prakhartandon_org/logm
 ## Usage
 
 ```ts
-import LogMonitor from "@prakhartandon_org/logm";
+import LogMonitor from "@prakhartandon_org/logm"
 
 // initialize the log monitor
-const Logger = new LogMonitor("dev"); // pass "prod" for production, default is "dev"
-Logger.log("Hello from my package");
-Logger.warn("Hello from my package");
-Logger.info("Hello from my package");
-Logger.error("Hello from my package");
+const Logger = new LogMonitor("dev") // pass "prod" for production, default is "dev"
+Logger.log("Hello from my package")
+Logger.warn("Hello from my package")
+Logger.info("Hello from my package")
+Logger.error("Hello from my package")
 
 //=> 'hello from my package'
 ```
@@ -46,10 +46,20 @@ node ./node_modules/@prakhartandon_org/logm/lib/setLineNumScript.js <paths>
 ### Logs after running the script
 
 ```ts
-Logger.log("[ @Location: index.ts:1 ]", "Hello from my package");
-Logger.warn("[ @Location: index.ts:1 ]", "Hello from my package");
-Logger.info("[ @Location: index.ts:1 ]", "Hello from my package");
-Logger.error("[ @Location: index.ts:1 ]", "Hello from my package");
+Logger.log("[ @Location: index.ts:1 ]", "Hello from my package")
+Logger.warn("[ @Location: index.ts:1 ]", "Hello from my package")
+Logger.info("[ @Location: index.ts:1 ]", "Hello from my package")
+Logger.error("[ @Location: index.ts:1 ]", "Hello from my package")
+```
+
+## Production Mode
+
+- In production mode, the logs are not displayed in the console.
+- The logs will be sent to the server of your choice.
+- You can set the POST Endpoint & API Token in the `LogMonitor` constructor.
+
+```ts
+const Logger = new LogMonitor("prod", "https://your-endpoint.com", "Bearer <your-api-token>")
 ```
 
 ## Contributing

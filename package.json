@@ -1,7 +1,7 @@
 {
   "name": "@prakhartandon_org/logm",
-  "version": "0.0.7",
-  "description": "Logging & Monitoring for Plugin Environments, where console.logs aren't displayed with complete context.",
+  "version": "0.0.8",
+  "description": "Logging & Monitoring for Plugin Environments, where console.logs aren't displayed with complete context. Also supports sending logs to any server.",
   "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
