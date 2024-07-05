@@ -1,9 +1,10 @@
-# logM v0.0.8 (beta)
+# logM v0.1.1 (beta)
 
 [![npm package][npm-img]][npm-url]
 ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=prakhart111.logM)
 
 > Logging & Monitoring Package that comes with a log-location script, useful for plugin/extensions environments where actual line numbers aren't accesible.
+> Log Batching for production. In prod mode, all logs will be pushed in an array and sent to the server in batches after you call the flush method.
 > Sample Usecase: Logging & Monitoring in Figma Plugins.
 
 ## Install
@@ -30,6 +31,13 @@ Logger.error("Hello from my package")
 ## Log Styling
 
 - Contains some default styling for the logs, based on the type.
+
+## Helper Functions
+
+- flush - To clear the logs batch (dev mode) and send the logs to the server (prod mode).
+- getBatchSize - To get the batch size for the logs.
+- getBatch - To get the batch of logs.
+- setIdLogM: To set the id for the logM instance. (maybe send userID here, that'll help in searching logs for a particular user.)
 
 ## Log Location (Line Number) Script
 

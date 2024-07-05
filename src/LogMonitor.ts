@@ -28,6 +28,14 @@ class LogMonitor {
     this.id = id
   }
 
+  getBatchSize() {
+    return this.logBatch.length
+  }
+
+  getBatch() {
+    return this.logBatch
+  }
+
   async flush() {
     if (this.mode === "prod") {
       await postLogBatchToServer(this.prodPOSTEndpoint, this.prodPOSTAuthToken, this.logBatch)
