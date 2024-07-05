@@ -46,6 +46,32 @@ const postToServer = async (type: string, prodPOSTEndpoint: string, prodPOSTAuth
   }
 }
 
+export const postLogBatchToServer = async (prodPOSTEndpoint: string, prodPOSTAuthToken: string, logBatch: unknown[]) => {
+  if (!logBatch.length) {
+    return
+  }
+
+  if (!isValidEndpoint(prodPOSTEndpoint)) {
+    throw new Error("Invalid endpoint")
+  }
+
+  const response = await fetch(prodPOSTEndpoint, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: prodPOSTAuthToken,
+    },
+    body: JSON.stringify(logBatch),
+  })
+
+  if (response.ok) {
+    // console.log("logM_beta: Log batch sent to server")
+  } else {
+    // console.error("logM_beta: Error sending log batch to server, check the endpoint and auth token and API request format for the server")
+    throw new Error("Error sending log batch to server")
+  }
+}
+
 const isValidEndpoint = (endpoint: string) => {
   return endpoint.startsWith("http://") || endpoint.startsWith("https://")
 }

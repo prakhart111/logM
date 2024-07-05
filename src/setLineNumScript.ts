@@ -33,7 +33,9 @@ export function processDirectory(dirPath: string) {
 
 function annotateLogs(filePath: string) {
   const fileContent = fs.readFileSync(filePath, "utf8")
-  const fileName = path.basename(filePath)
+  const folderName = path.dirname(filePath).split(path.sep).pop()
+  console.log("Processing file: ", folderName)
+  const fileName = folderName + "/" + path.basename(filePath)
   const lines = fileContent.split("\n")
 
   const annotatedLines = lines.map((line, index) => {
