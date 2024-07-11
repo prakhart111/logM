@@ -1,4 +1,4 @@
-# logM v0.1.1 (beta)
+# logM v0.1.3 (beta)
 
 [![npm package][npm-img]][npm-url]
 ![Visitors](https://visitor-badge.laobi.icu/badge?page_id=prakhart111.logM)
