@@ -47,28 +47,35 @@ const postToServer = async (type: string, prodPOSTEndpoint: string, prodPOSTAuth
 }
 
 export const postLogBatchToServer = async (prodPOSTEndpoint: string, prodPOSTAuthToken: string, logBatch: unknown[]) => {
-  if (!logBatch.length) {
+  try {
+    if (!logBatch.length) {
+      return
+    }
+
+    if (!isValidEndpoint(prodPOSTEndpoint)) {
+      throw new Error("Invalid endpoint")
+    }
+
+    const response = await fetch(prodPOSTEndpoint, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: prodPOSTAuthToken,
+      },
+      body: JSON.stringify(logBatch),
+    })
+
+    if (response.ok) {
+      // console.log("logM_beta: Log batch sent to server")
+    } else {
+      throw new Error("Error sending log batch to server")
+    }
+  } catch (error: any) {
+    console.error("Error message: ", error?.message || error)
+    console.error(
+      "logM_beta: Something Went Wrong while Flushing! Visit the docs https://www.npmjs.com/package/@prakhartandon_org/logm for more info."
+    )
     return
-  }
-
-  if (!isValidEndpoint(prodPOSTEndpoint)) {
-    throw new Error("Invalid endpoint")
-  }
-
-  const response = await fetch(prodPOSTEndpoint, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: prodPOSTAuthToken,
-    },
-    body: JSON.stringify(logBatch),
-  })
-
-  if (response.ok) {
-    // console.log("logM_beta: Log batch sent to server")
-  } else {
-    // console.error("logM_beta: Error sending log batch to server, check the endpoint and auth token and API request format for the server")
-    throw new Error("Error sending log batch to server")
   }
 }
 

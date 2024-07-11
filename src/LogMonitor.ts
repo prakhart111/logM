@@ -53,16 +53,19 @@ class LogMonitor {
     if (this.mode === "dev") {
       DevLogger.log(logLocation, style, ...contents)
     } else {
-      // ProdLogger.log(this.prodPOSTEndpoint, this.prodPOSTAuthToken, logLocation, style, ...contents)
-      contents.map((content: any) => {
-        if (content.status) {
-          status = content.status
-        }
-        if (content.endpoint) {
-          endpoint = content.endpoint
-        }
-      })
-      this.logBatch.push({ type: "LOG", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      if (!contents) {
+        this.logBatch.push({ type: "LOG", logLocation, id: this.id, status, endpoint, data: "NA" })
+      } else {
+        contents.map((content: any) => {
+          if (content?.status) {
+            status = content?.status
+          }
+          if (content?.endpoint) {
+            endpoint = content?.endpoint
+          }
+        })
+        this.logBatch.push({ type: "LOG", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      }
     }
   }
 
@@ -75,15 +78,20 @@ class LogMonitor {
     if (this.mode === "dev") {
       DevLogger.error(logLocation, style, ...contents)
     } else {
-      contents.map((content: any) => {
-        if (content.status) {
-          status = content.status
-        }
-        if (content.endpoint) {
-          endpoint = content.endpoint
-        }
-      })
-      this.logBatch.push({ type: "ERROR", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      if (!contents) {
+        this.logBatch.push({ type: "ERROR", logLocation, id: this.id, status, endpoint, data: "NA" })
+      } else {
+        contents.map((content: any) => {
+          if (content?.status) {
+            status = content?.status
+          }
+          if (content?.endpoint) {
+            endpoint = content?.endpoint
+          }
+        })
+
+        this.logBatch.push({ type: "ERROR", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      }
     }
   }
 
@@ -96,15 +104,19 @@ class LogMonitor {
     if (this.mode === "dev") {
       DevLogger.warn(logLocation, style, ...contents)
     } else {
-      contents.map((content: any) => {
-        if (content.status) {
-          status = content.status
-        }
-        if (content.endpoint) {
-          endpoint = content.endpoint
-        }
-      })
-      this.logBatch.push({ type: "WARN", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      if (!contents) {
+        this.logBatch.push({ type: "WARN", logLocation, id: this.id, status, endpoint, data: "NA" })
+      } else {
+        contents.map((content: any) => {
+          if (content?.status) {
+            status = content?.status
+          }
+          if (content?.endpoint) {
+            endpoint = content?.endpoint
+          }
+        })
+        this.logBatch.push({ type: "WARN", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      }
     }
   }
 
@@ -117,15 +129,19 @@ class LogMonitor {
     if (this.mode === "dev") {
       DevLogger.info(logLocation, style, ...contents)
     } else {
-      contents.map((content: any) => {
-        if (content.status) {
-          status = content.status
-        }
-        if (content.endpoint) {
-          endpoint = content.endpoint
-        }
-      })
-      this.logBatch.push({ type: "INFO", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      if (!contents) {
+        this.logBatch.push({ type: "INFO", logLocation, id: this.id, status, endpoint, data: "NA" })
+      } else {
+        contents.map((content: any) => {
+          if (content?.status) {
+            status = content?.status
+          }
+          if (content?.endpoint) {
+            endpoint = content?.endpoint
+          }
+        })
+        this.logBatch.push({ type: "INFO", logLocation, id: this.id, status, endpoint, data: { ...contents } })
+      }
     }
   }
 }
